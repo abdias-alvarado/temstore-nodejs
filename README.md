@@ -26,17 +26,13 @@ Espress
 
 ## CONTRIBUIDORES
 
-Abdias E. Alvarado 
-abdias-alvarado
+Abdias E. Alvarado / abdias-alvarado
 
-Mario Chapas
-mfchapas
+Mario Chapas / mfchapas
 
-Maria J. Pagoaga
-mariajpapo
+Maria J. Pagoaga / mariajpapo
 
-Noe Paz
-noe-paz
+Noe Paz / noe-paz
 
 
 ## VERSIÓN
