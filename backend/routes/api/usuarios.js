@@ -16,17 +16,17 @@ PUT     |   router.put    |  Actualizar
 DELETE  |   router.delete |  Borrar
  */
 
-router.post('/new', function(req, res, next){
+router.post('/nuevo', function(req, res, next){
   var _userData = req.body;
   console.log(_userData);
-  res.json({"msg":"ok"});
+  res.json({"msg":"Usuario agregado exitosamente."});
 }); // post new
 
 
 router.post('/login', function(req, res, next){
   var _userData = req.body;
   console.log(_userData);
-  res.json({"msg":"ok"});
+  res.json({"msg":"Ingreso exitoso."});
 });// post login
 
 

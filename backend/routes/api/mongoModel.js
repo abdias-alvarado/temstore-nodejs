@@ -16,8 +16,18 @@ function mongoModel(db){
        );
   }
 
-  lib.getProductoId = (idProducto, handler)=>{
+  lib.getProducto = (idProducto, handler)=>{
     productos.findOne({ "_id": new ObjectId(idProducto)}, (err, doc)=>{
+        if(err){
+          handler(err, null);
+        }else{
+          handler(null, doc);
+        }
+      });
+  }
+
+  lib.getPorCategoria = (categoria, handler)=>{
+    productos.findOne({"categoria": categoria}, (err, doc)=>{
         if(err){
           handler(err, null);
         }else{
