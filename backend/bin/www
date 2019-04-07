@@ -3,6 +3,15 @@
 /**
  * Module dependencies.
  */
+var mongoClient = require('mongodb').MongoClient;
+
+mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, function(err, conn) {
+   if (err) {
+       console.log("error", err);
+       process.exit(1);
+   }
+   var db = conn.db("temstorehn");
+   console.log("Servidor TemStore HN escuchando en puerto 3000.");
 
 var app = require('../app');
 var debug = require('debug')('temstorehn:server');
@@ -88,3 +97,6 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+}); // end mongoConnect
