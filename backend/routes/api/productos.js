@@ -5,14 +5,15 @@ var router = express.Router();
 function productosInit(db){
 
 var fileModel = require('./jsonmodel');
-var mongoModel = require('./mongoModel')(db);
+var productosModel = require('./productosModel')(db);
 var data = null; 
 
 var productoFormat = {
   'nombre':'',
   'descripcion':'',
   'categoria':'',
-  'precio':null
+  'precio':null,
+  'fechaIngreso': null
 };
 
 /**
@@ -20,7 +21,7 @@ var productoFormat = {
  */
 router.get('/', function( req, res, next) {
 
-  mongoModel.getProductos(
+  productosModel.getProductos(
     function(err, docs){
       if(err) {
         console.log(err);
@@ -32,7 +33,7 @@ router.get('/', function( req, res, next) {
 });
 
 router.get('/producto/:idproducto', (req, res, next)=>{
-  mongoModel.getProducto(req.params.idproducto, (err, resultado)=>{
+  productosModel.getProducto(req.params.idproducto, (err, resultado)=>{
     if(err){
       console.log(err);
       return res.status(500).json({"error":"Error al obtener el producto."});
@@ -42,7 +43,7 @@ router.get('/producto/:idproducto', (req, res, next)=>{
 }); 
 
 router.get('/categoria/:categoria', (req, res, next)=>{
-  mongoModel.getPorCategoria(req.params.categoria, (err, docs)=>{
+  productosModel.getPorCategoria(req.params.categoria, (err, docs)=>{
     if(err){
       console.log(err);
       return res.status(500).json({"error":"No se encontraron productos de esa categoría"});
@@ -62,7 +63,7 @@ router.post('/nuevo', function(req, res, next){
   producto.fecha_ingreso = fechaIngreso;
  
   // Mongo Model
-  mongoModel.addProducto(producto, (err, resultado)=>{
+  productosModel.addProducto(producto, (err, resultado)=>{
     if(err){
       console.log(err);
       return res.status(500).json({"error":"No se ha podido agregar el producto."});
@@ -74,7 +75,7 @@ router.post('/nuevo', function(req, res, next){
 router.put('/actualizar/:idproducto', function(req, res, next){
   var id = req.params.idproducto;
   var producto = Object.assign({} , productoFormat, req.body);
-  mongoModel.updateProducto(producto, id, (err, resultado)=>{
+  productosModel.updateProducto(producto, id, (err, resultado)=>{
     if(err){
       console.log(err);
       return res.status(500).json({"error":"No se ha podido actualizar el producto."});
@@ -85,7 +86,7 @@ router.put('/actualizar/:idproducto', function(req, res, next){
 
 router.delete('/eliminar/:idproducto', function(req, res, next){
   var id = req.params.idproducto;
-  mongoModel.deleteProducto(id, (err, resultado)=>{
+  productosModel.deleteProducto(id, (err, resultado)=>{
     if(err){
       return res.status(500).json({"error":"No se ha podido eliminar el producto."});
     }
