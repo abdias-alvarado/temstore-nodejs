@@ -1,6 +1,6 @@
 var ObjectId = require("mongodb").ObjectID;
 
-function mongoModel(db){
+function productosModel(db){
   var lib = {};
   var productos = db.collection('productos');
 
@@ -16,7 +16,7 @@ function mongoModel(db){
        );
   }
 
-  lib.getProductoId = (idProducto, handler)=>{
+  lib.getProducto = (idProducto, handler)=>{
     productos.findOne({ "_id": new ObjectId(idProducto)}, (err, doc)=>{
         if(err){
           handler(err, null);
@@ -24,6 +24,18 @@ function mongoModel(db){
           handler(null, doc);
         }
       });
+  }
+
+  lib.getPorCategoria = (categoria, handler)=>{
+    productos.find({"categoria": categoria}).toArray(
+      (err , resultado) => {
+        if(err){
+          handler(err, null);
+        }else{
+          handler(null, resultado);
+        }
+      }
+     );
   }
 
 
@@ -38,34 +50,32 @@ function mongoModel(db){
   }
 
 
-  lib.updateProducto = (id, handler) => {
+  lib.updateProducto = (producto, id, handler) => {
     var filter = {"_id": ObjectId(id)};
+    producto.fechaIngreso = new Date();
+    var updateStatement = {$set: producto}
     // get filered document
-    productos.findOne(filter, (err, doc) => {
+    productos.updateOne(filter, updateStatement, {upsert:true}, (err, doc) => {
       if(err) {
         handler(err, null);
       } else {
-          if(doc){
-
-              var updateExpression = {};
-              if(doc.done){
-                  updateExpression = {"$set": {done : false, fcDone:null} };
-              }else{
-                  updateExpression = { "$set": { done: true, fcDone:new Date() } };
-              }
-              productos.updateOne(filter, updateExpression, (err, rslt)=> {
-                  if(err) {
-                    handler(err, null);
-                  }else{
-                    handler(null, rslt.result);
-                  }
-              });
-          }else{
-            handler(new Error("El producto no existe."), null)
-          }
+        handler(null, doc);
       }
-    } );
+    });
   }
+
+  lib.deleteProducto = (id, handler) => {
+    productos.deleteOne({"_id": ObjectId(id)}, (err, result)=>{
+      if(err){
+        handler(err, null);
+      } else {
+        handler(null, result.result);
+      }
+    });
+  
+  }
+
+
   return lib;
-} // mongoModel
- module.exports = mongoModel;
+} // productosModel
+ module.exports = productosModel;
