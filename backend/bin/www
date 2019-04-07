@@ -11,7 +11,7 @@ mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, func
         process.exit(1);
     }
     var db = conn.db("temstorehn");
-    console.log("Servidor TemStore HN escuchando en puerto 3000.");
+    console.log("Servidor TemStore HN escuchando en puerto 3001.");
 
     var app = require('../app')(db);
     var debug = require('debug')('temstorehn:server');
@@ -21,7 +21,7 @@ mongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true }, func
      * Get port from environment and store in Express.
      */
 
-    var port = normalizePort(process.env.PORT || '3000');
+    var port = normalizePort(process.env.PORT || '3001');
     app.set('port', port);
 
     /**
