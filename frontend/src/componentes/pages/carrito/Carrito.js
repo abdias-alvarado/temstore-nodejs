@@ -33,24 +33,25 @@ function CardCarrito(props){
                     </center>
                 </div>
                 <div className="detalles">
-                    <table>
-                        <tr>
-                            <td rowspan="5"> IMG </td>
-                        </tr>
-                        <tr>
-                            <td className="pull-left">{props.nombre}</td>
-                        </tr>
-                        <tr>
-                            <td className="pull-left">{props.descripcion} </td>
-                        </tr>
-                        <tr>
-                            <td className="pull-left">{props.categoria}</td>
-                        </tr>
-                        <tr>
-                            <td className="pull-left">L.{props.precio}</td>
-                        </tr>
-                    </table>
+                <table>
+                    <tr>
+                        <td rowspan="5"> IMG </td>
+                    </tr>
+                    <tr>
+                        <td className="pull-left">{props.nombre}</td>
+                    </tr>
+                    <tr>
+                        <td className="pull-left">{props.descripcion} </td>
+                    </tr>
+                    <tr>
+                        <td className="pull-left">{props.categoria}</td>
+                    </tr>
+                    <tr>
+                        <td className="pull-left">L.{props.precio}</td>
+                    </tr>
+                </table>
                 </div>
+                
             </div>
         </div>
         <div className="col-md-3"></div>
