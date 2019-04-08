@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import {Redirect, Link} from 'react-router-dom';
 import { MDBBtn } from 'mdbreact';
 import logo from '../../../images/logo.png';
 import "./Login.css";
 import axios from 'axios';
+import Catalogo from '../catalogo/Catalogo';
 
 class Login extends Component {
     constructor(){
@@ -15,14 +17,18 @@ class Login extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
     }
     render() {
+    if (this.state.redirecto && true){
+        return (<Redirect to="/catalogo" />);
+    }
     return (
         <div>
             <br/>
-            <img src={logo} alt="Logo" width="100px"></img>
             <h2>TEM STORE HN</h2>
+            <img src={logo} alt="Logo" width="100px"></img>
             <br/>
             <br/>  
             <h4 className="font-fix-header">Iniciar sesión</h4>
+            <br/>
             <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
             Usuario
             </label>
@@ -56,10 +62,25 @@ class Login extends Component {
     };
 
     onClickHandler(e){
+        e.preventDefault();
+        e.stopPropagation();
+
         axios.post('/api/usuarios/login',
-        {...this.state}).then(response => {
-            console.log(response);
-        }).catch(err => console.log(err));
+        {...this.state}).then((resp)=>{
+            alert(resp.data.msg);
+            if(resp.data.msg === "Ingresado correctamente."){
+              this.props.auth.setAuthState(
+                {
+                  "isAuthenticated": true,
+                  "user": this.state.email,
+                  "firstVerified": true
+                }
+              );
+              this.setState({"redirecto": true});
+            }
+          }).catch( (err) => {
+            alert(err);
+          } );
     };
 };
 export default Login;

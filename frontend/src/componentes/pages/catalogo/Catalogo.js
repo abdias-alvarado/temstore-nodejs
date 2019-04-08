@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+
 import Header from './../../generics/header/Header';
 import Footer from './../../generics/footer/Footer';
 
@@ -17,13 +19,21 @@ import "./Catalogo.css";
 
 
 class Catalogo extends Component {
+    constructor(){
+        super();
+        this.state = {
+          things:[],
+          isLoading: false,
+          error: false,
+        }
+    }
 
     render() {
     return (
         <div>
             <Header/>
             <div className="card">
-
+                <h1>Catalogo</h1>
             </div>
             
             <Footer/>         
