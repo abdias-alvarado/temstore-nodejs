@@ -11,7 +11,7 @@ class Catalogo extends Component {
             <div>
                 <br />
                 <h2>TEM STORE HN</h2>
-                <img src={logo} alt="Logo" width="100px"></img>
+                
             </div>
                
         </div>
