@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MDBBtn } from 'mdbreact';
-import logo from '../../../images/logo.jpeg';
+import logo from '../../../images/logo.png';
 import "./Login.css";
 
 class Login extends Component {
@@ -10,11 +10,12 @@ class Login extends Component {
         <form>
             <div>
                 <br />
-                <img src={logo} alt="Logo" width="100px"></img>
                 <h2>TEM STORE HN</h2>
+                <img src={logo} alt="Logo" width="100px"></img>
             </div>
                 <br />
-                <h4 className="font-fix-header">Iniciar sesión</h4>
+                <h4 className="font-fix-header">Iniciar Sesión</h4>
+                <br/>
                 <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
                 Usuario
                 </label>
