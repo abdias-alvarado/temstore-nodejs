@@ -1,17 +1,21 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { MDBBtn } from 'mdbreact';
 
-import Header from '../../generics/header/Header';
-import Footer from '../../generics/footer/Footer';
+import "./Catalogo.css";
 
-class Catalogo extends Component{
-  render(){
+class Catalogo extends Component {
+
+    render() {
     return (
-      <div>
-        
-        <Footer></Footer>
-      </div>
+        <div>
+            <div>
+                <br />
+                <h2>TEM STORE HN</h2>
+                <img src={logo} alt="Logo" width="100px"></img>
+            </div>
+               
+        </div>
     );
-  }
-}
-
+    };
+};
 export default Catalogo;
