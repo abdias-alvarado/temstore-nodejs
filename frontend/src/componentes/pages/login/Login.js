@@ -10,8 +10,8 @@ class Login extends Component {
         <form>
             <div>
                 <br />
-                <img src={logo} alt="Logo" width="100px" height="100px"></img>
-                <h2>Temstore HN</h2>
+                <img src={logo} alt="Logo" width="100px"></img>
+                <h2>TEM STORE HN</h2>
             </div>
                 <br />
                 <h4 className="font-fix-header">Iniciar sesión</h4>
