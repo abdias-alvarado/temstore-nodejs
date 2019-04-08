@@ -38,16 +38,16 @@ function CardCarrito(props){
                             <td rowspan="5"> IMG </td>
                         </tr>
                         <tr>
-                            <td className="pull-left"><b>Nombre: </b> {props.nombre}</td>
+                            <td className="pull-left">{props.nombre}</td>
                         </tr>
                         <tr>
-                            <td className="pull-left"><b>Descripcion: </b> {props.descripcion} </td>
+                            <td className="pull-left">{props.descripcion} </td>
                         </tr>
                         <tr>
-                            <td className="pull-left"><b>Categoria: </b> {props.categoria}</td>
+                            <td className="pull-left">{props.categoria}</td>
                         </tr>
                         <tr>
-                            <td className="pull-left"><b>Precio: </b> L.{props.precio}</td>
+                            <td className="pull-left">L.{props.precio}</td>
                         </tr>
                     </table>
                 </div>
