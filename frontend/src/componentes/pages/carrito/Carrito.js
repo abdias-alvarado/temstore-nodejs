@@ -44,7 +44,7 @@ function CardCarrito(props){
                             <td className="pull-left"><b>Descripcion: </b> {props.descripcion} </td>
                         </tr>
                         <tr>
-                            <td className="pull-left"><b>Categoria: </b> L.{props.categoria}</td>
+                            <td className="pull-left"><b>Categoria: </b> {props.categoria}</td>
                         </tr>
                         <tr>
                             <td className="pull-left"><b>Precio: </b> L.{props.precio}</td>
@@ -59,7 +59,7 @@ function CardCarrito(props){
     );
 }
 
-class Catalogo extends Component {
+class Carrito extends Component {
     constructor(){
         super();
         this.state = {
@@ -123,30 +123,13 @@ class Catalogo extends Component {
         {
             axios.delete(`/api/productos/eliminar/${idproducto}`)
             .then((resp)=>{
-                window.location = '/catalogo';          
+                window.location = '/carrito';          
             }).catch( (err) => {
                 alert(err);
             } );
         }
 
-        /*
-        axios.post('/api/usuarios/login',
-        {...this.state}).then((resp)=>{
-            alert(resp.data.msg);
-            if(resp.data.msg === "Ingresado correctamente."){
-              this.props.auth.setAuthState(
-                {
-                  "isAuthenticated": true,
-                  "user": this.state.email,
-                  "firstVerified": true
-                }
-              );
-              this.setState({"redirecto": true});
-            }
-          }).catch( (err) => {
-            alert(err);
-          } );*/
-          
+       
     };
 };
-export default Catalogo;
+export default Carrito;
