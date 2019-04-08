@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -28,7 +29,8 @@ class Header extends Component {
                 <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Ver Carrito</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3">Cerrar Sesión</NavDropdown.Item>
+               
+                <NavDropdown.Item href="#"><Link to="salir">Cerrar Sesión</Link></NavDropdown.Item>
               </NavDropdown>
             </Nav>
             

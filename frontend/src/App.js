@@ -31,9 +31,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-            <Route path="/" exact component={Home}/>
+            <Route path="/" exact render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)}/>
             <Route path="/login"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
             <PrivateRoute path="/catalogo" component={Catalogo} auth={this.state}/>
+            <Route path="/salir"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
     
         </div>
       </Router>

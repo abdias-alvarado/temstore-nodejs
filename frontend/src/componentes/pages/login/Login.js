@@ -23,11 +23,12 @@ class Login extends Component {
     return (
         <div>
             <br/>
-            <img src={logo} alt="Logo" width="100px"></img>
             <h2>TEM STORE HN</h2>
+            <img src={logo} alt="Logo" width="100px"></img>
             <br/>
             <br/>  
             <h4 className="font-fix-header">Iniciar sesión</h4>
+            <br/>
             <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
             Usuario
             </label>
