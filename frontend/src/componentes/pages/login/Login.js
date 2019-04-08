@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MDBBtn } from 'mdbreact';
-import logo from '../../../images/logo.jpeg';
+import logo from '../../../images/logo.png';
 import "./Login.css";
 
 class Login extends Component {
