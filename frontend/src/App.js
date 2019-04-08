@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="Inner-app">
-          <Catalogo />
+          <Login />
         </div>
       </div>
     );
