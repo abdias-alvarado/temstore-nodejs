@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-=======
-/*empezando carretilla */
-
-
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
 import React, { Component } from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
 import Header from './../../generics/header/Header';
 import Footer from './../../generics/footer/Footer';
-<<<<<<< HEAD
 import DataTable from 'react-data-table-component';
 
 import Button from 'react-bootstrap/Button';
@@ -53,66 +46,11 @@ const handleChange = (state) => {
 
 
 
-=======
-
-
-import { MDBBtn } from 'mdbreact';
-import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-import logo from '../../../images/logo.png';
-
-import "./Carrito.css";
-
-function CardCarrito(props){            
-    return(
-    <div className="row"  key={props._id}>
-        <div className="col-md-3"></div>
-        <div className="col-md-6">
-            <div className="card shadow p-3 mb-5 bg-white rounded">
-                <div>
-                    <center>
-                        <h3>Carrito Compra</h3>
-                    </center>
-                </div>
-                <div className="detalles">
-                <table>
-                    <tr>
-                        <td rowspan="5"> IMG </td>
-                    </tr>
-                    <tr>
-                        <td className="pull-left">{props.nombre}</td>
-                    </tr>
-                    <tr>
-                        <td className="pull-left">{props.descripcion} </td>
-                    </tr>
-                    <tr>
-                        <td className="pull-left">{props.categoria}</td>
-                    </tr>
-                    <tr>
-                        <td className="pull-left">L.{props.precio}</td>
-                    </tr>
-                </table>
-                </div>
-                
-            </div>
-        </div>
-        <div className="col-md-3"></div>
-      
-    </div>
-    );
-}
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
 
 class Carrito extends Component {
     constructor(){
         super();
         this.state = {
-<<<<<<< HEAD
           carrito:[],
           isLoading: false,
           error: false,
@@ -122,23 +60,12 @@ class Carrito extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
-=======
-          productos:[],
-          isLoading: false,
-          error: false,
-        }
-        this.onClickHandler = this.onClickHandler.bind(this);
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
     }
     componentDidMount(){
         this.setState({isLoading:true});
         axios.get('/api/productos')
           .then( (resp)=>{
-<<<<<<< HEAD
             this.setState({carrito:resp.data, isLoading:false});
-=======
-            this.setState({productos:resp.data, isLoading:false});
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
           })
           .catch( (err)=>{
             alert(err);
@@ -147,29 +74,10 @@ class Carrito extends Component {
     }
     
     render() {
-<<<<<<< HEAD
-=======
-        let listItems = [];
-        if(this.state.productos.length > 0 ){
-            listItems = this.state.productos.map((o, i)=>{
-                return (
-                <div>
-                    <CardCarrito {...o} /> 
-                    <div className="acciones">
-                        <button name="editar" data-id={o._id} className="btn btn-sm btn-warning" onClick={this.onClickHandler}><i className="fas fa-pen"></i></button>
-                        <button name="comprar" data-id={o._id} className="btn btn-sm btn-success" onClick={this.onClickHandler}><i className="fas fa-shopping-cart"></i></button>
-                        <button name="borrar" data-id={o._id} className="btn btn-sm btn-danger" onClick={this.onClickHandler}><i className="fas fa-trash"></i></button>
-                    </div>
-                    <hr/>
-                </div>);
-            });
-        }
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
         return (
             <div>
                 <Header/>
                 <div>
-<<<<<<< HEAD
                     <h3><b>Carrito</b></h3>
                 </div>
                 <div className="row">
@@ -211,16 +119,6 @@ class Carrito extends Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>         
-=======
-                    <h3><b>Catálogo</b></h3>
-                </div>
-                <div>
-                    {listItems}
-                </div>
-                { (this.state.isLoading)? "...Cargando": null }
-                
-                <Footer/>         
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
             </div>
         );
     };
@@ -235,16 +133,11 @@ class Carrito extends Component {
         {
             axios.delete(`/api/productos/eliminar/${idproducto}`)
             .then((resp)=>{
-<<<<<<< HEAD
-                window.location = '/catalogo';          
-=======
                 window.location = '/carrito';          
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
             }).catch( (err) => {
                 alert(err);
             } );
         }
-<<<<<<< HEAD
        
     };
 
@@ -257,10 +150,3 @@ class Carrito extends Component {
 export default Carrito;
 
 
-=======
-
-       
-    };
-};
-export default Carrito;
->>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315

@@ -27,16 +27,6 @@ class Header extends Component {
               <Nav.Link href="#"><Link className="text-white" to="catalogo">Catálogo</Link></Nav.Link>
               <Nav.Link href="#"><Link className="text-white" to="carrito">Carrito</Link><span class="badge badge-light align-middle counter">0</span></Nav.Link>
 
-              <Nav.Link href="#clientes">Clientes</Nav.Link>
-              <Nav.Link href="#productos">Productos</Nav.Link>
-              <Nav.Link href="#carrito">Carrito</Nav.Link>
-              <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Ver Carrito</NavDropdown.Item>
-                <NavDropdown.Divider />
-               
-                <NavDropdown.Item href="#"><Link to="salir">Cerrar Sesión</Link></NavDropdown.Item>
-              </NavDropdown>
               
             </Nav>
             <Nav>
