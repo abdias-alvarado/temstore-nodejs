@@ -17,6 +17,14 @@ import "./Catalogo.css";
 
 
 class Catalogo extends Component {
+    constructor(){
+        super();
+        this.state = {
+          things:[],
+          isLoading: false,
+          error: false,
+        }
+    }
 
     render() {
     return (

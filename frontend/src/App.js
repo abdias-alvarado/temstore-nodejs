@@ -10,14 +10,33 @@ import './App.css';
 import Login from './componentes/pages/login/Login';
 import Catalogo from './componentes/pages/catalogo/Catalogo';
 
+function Home() {
+  return (<h1>Home</h1>);
+}
+
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      isAuthenticated : false,
+      user: null,
+      firsVerified: false
+    }
+    this.setAuthState = this.setAuthState.bind(this);
+  }
+  setAuthState(authProps){
+    this.setState(authProps);
+  }
   render() {
     return (
-      <div className="App">
-        <div className="Inner-app">
-          <Login />
+      <Router>
+        <div className="App">
+            <Route path="/" exact component={Home}/>
+            <Route path="/login"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
+            <PrivateRoute path="/catalogo" component={Catalogo} auth={this.state}/>
+    
         </div>
-      </div>
+      </Router>
     );
   }
 }
