@@ -40,7 +40,6 @@ class App extends Component {
               <PrivateRoute path="/catalogo" component={Catalogo} auth={this.state}/>
               <PrivateRoute path="/carrito" component={Carrito} auth={this.state}/>
               <Route path="/salir" render={(p)=>(<Salir {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
-      
           </div>
         </Router>
       </div>

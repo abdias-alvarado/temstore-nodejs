@@ -8,19 +8,21 @@ var carritoModel = require('./carritoModel')(db);
 var data = null; 
 
 var carritoFormat = {
-  'nombre':'',
+  'cliente':'',
+  'producto':'',
   'descripcion':'',
   'categoria':'',
   'precio':null,
-  'fechaIngreso': null
+  'cantidad': null,
+  'subtotal': null
 };
 
 /**
  * CONSULTAS A LA BASE DE DATOS
  */
-router.get('/', function( req, res, next) {
+router.get('/:cliente', function( req, res, next) {
 
-    carritoModel.getProductos(
+  carritoModel.getCarrito(req.params.cliente,
     function(err, docs){
       if(err) {
         console.log(err);
@@ -28,40 +30,38 @@ router.get('/', function( req, res, next) {
       }
       return res.status(200).json(docs);
     }
-  ); // getProductos
+  ); // getCarrito
 });
 
 /**
  * INSERCIONES Y MODIFICACIONES
  */
-router.post('/nuevo', function(req, res, next){
-  var producto = Object.assign({} , productoFormat, req.body);
-  var fechaIngreso = new Date();
-
-  producto.fecha_ingreso = fechaIngreso;
+router.post('/agregar', function(req, res, next){
+  var carrito = Object.assign({} , carritoFormat, req.body);
+  var subtotal = parseInt(carrito.cantidad) * parseFloat(carrito.precio);
+  carrito.subtotal = subtotal;
  
-  // Mongo Model
-  carritoModel.addProducto(producto, (err, resultado)=>{
+  carritoModel.addCarrito(carrito, (err, resultado)=>{
     if(err){
       console.log(err);
-      return res.status(500).json({"error":"No se ha podido agregar el producto."});
+      return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});
     }
     return res.status(200).json(resultado);
   });// nuevoProducto
 });
 
-router.delete('/eliminar/:idproducto', function(req, res, next){
-  var id = req.params.idproducto;
-  productosModel.deleteProducto(id, (err, resultado)=>{
+router.delete('/eliminar/:idcarrito', function(req, res, next){
+  var id = req.params.idcarrito;
+  carritoModel.deleteCarrito(id, (err, resultado)=>{
     if(err){
-      return res.status(500).json({"error":"No se ha podido eliminar el producto."});
+      return res.status(500).json({"error":"No se ha podido eliminar el producto del carrito."});
     }
     return res.status(200).json(resultado);
-  }); // deleteProducto
+  }); // deleteCarrito
 }); 
 
 return router;
 
-} // productosInit
+} // carritoInit
 
 module.exports = carritoInit;
