@@ -9,7 +9,8 @@ import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 import Login from './componentes/pages/login/Login';
 import Catalogo from './componentes/pages/catalogo/Catalogo';
-
+import Carrito from './componentes/pages/carrito/Carrito';
+import Salir from './componentes/generics/salir/Salir';
 
 function Home() {
   return (<h1>Home</h1>);
@@ -36,7 +37,8 @@ class App extends Component {
               <Route path="/" exact render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)}/>
               <Route path="/login"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <PrivateRoute path="/catalogo" component={Catalogo} auth={this.state}/>
-              <Route path="/salir"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
+              <PrivateRoute path="/carrito" component={Carrito} auth={this.state}/>
+              <Route path="/salir" render={(p)=>(<Salir {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
       
           </div>
         </Router>

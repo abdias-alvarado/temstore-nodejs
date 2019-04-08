@@ -17,8 +17,16 @@ class Login extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
     }
     render() {
-    if (this.state.redirecto && true){
-        return (<Redirect to="/catalogo" />);
+    
+    if (localStorage.getItem('autorizado') === 'true'){
+        if(typeof this.props.location.state === "undefined")
+        {
+          return (<Redirect to={'/catalogo'} />);
+        }
+        else{
+          return (<Redirect to={this.props.location.state.from.pathname} />);
+        }
+         
     }
     return (
         <div>
@@ -77,6 +85,7 @@ class Login extends Component {
                 }
               );
               this.setState({"redirecto": true});
+              localStorage.setItem('autorizado', 'true');
             }
           }).catch( (err) => {
             alert(err);

@@ -5,19 +5,14 @@ import axios from 'axios';
 import Header from './../../generics/header/Header';
 import Footer from './../../generics/footer/Footer';
 
-
-import { MDBBtn } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import logo from '../../../images/logo.png';
+import Modal from 'react-bootstrap/Modal';
+import FloatingButton from '../../generics/addbutton/FloatingButton';
 
 import "./Catalogo.css";
 
+ 
 function CardProducto(props){            
     return(
     <div className="row"  key={props._id}>
@@ -36,7 +31,8 @@ function CardProducto(props){
                 </div>
             </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-3">
+        </div>
       
     </div>
     );
@@ -49,8 +45,11 @@ class Catalogo extends Component {
           productos:[],
           isLoading: false,
           error: false,
+          show: false
         }
         this.onClickHandler = this.onClickHandler.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
     }
     componentDidMount(){
         this.setState({isLoading:true});
@@ -65,6 +64,7 @@ class Catalogo extends Component {
     }
     
     render() {
+      
         let listItems = [];
         if(this.state.productos.length > 0 ){
             listItems = this.state.productos.map((o, i)=>{
@@ -89,9 +89,33 @@ class Catalogo extends Component {
                 <div>
                     {listItems}
                 </div>
-                { (this.state.isLoading)? "...Cargando": null }
+                <div className="row">
+                    <div className="col-md-5"></div>
+                    <div className="col-md-5"></div>
+                    <div className="col-md-2">
+                        <button name="nuevo" className="badge badge-pill badge-success btn-new" onClick={this.onClickHandler}><i className="fas fa-plus"></i></button>
+                    </div>
+                </div>
                 
-                <Footer/>         
+                { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
+
+                
+                
+                <Footer/>
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Eliminar Producto</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>¿Está seguro que desea eliminar el producto?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="default" onClick={this.handleClose}>
+                        Cancelar
+                        </Button>
+                        <Button variant="danger" onClick={this.onClickHandler}>
+                        Eliminar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>         
             </div>
         );
     };
@@ -111,6 +135,11 @@ class Catalogo extends Component {
                 alert(err);
             } );
         }
+        else if (accion == "nuevo")
+        {
+            //this.setState({ show: true });
+        }
+
 
         /*
         axios.post('/api/usuarios/login',
@@ -131,5 +160,9 @@ class Catalogo extends Component {
           } );*/
           
     };
+
+    handleClose() {
+        this.setState({ show: false });
+    }
 };
 export default Catalogo;

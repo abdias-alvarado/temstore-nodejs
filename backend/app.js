@@ -12,15 +12,15 @@ function appInit(db) {
 
 var sessionStore = new MongoSessionStore(
     {
-      uri : 'mongodb://localhost:27017/obtsessionstore',
-      databaseName: 'obtsessionstore',
-      collection: 'sesiones'
+      uri : 'mongodb://localhost:27017/temstoresession',
+      databaseName: 'temstoresession',
+      collection: 'sessions'
     },
     function(err){
       if(err){
           console.log(err);
       }else{
-        console.log("Session Storage OK");
+        console.log("Session Storage Started");
       }
     }
 );
@@ -40,9 +40,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(session({
-  secret:'cuandoLosGatosNoEstanLosRatonesFiestaHacen',
+  secret:'elRespetoAlDerechoAjenoEsLaPaz',
   cookie:{
-    maxAge: (1000 * 60 * 60 * 24 * 3), //mil, sec, min, hrs, dia 
+    maxAge: (1000 * 60 * 60 * 24), 
   },
   store: sessionStore,
   resave: true,
