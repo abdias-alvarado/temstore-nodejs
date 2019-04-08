@@ -22,7 +22,11 @@ class Catalogo extends Component {
     return (
         <div>
             <Header/>
-         
+            <div className="card">
+
+            </div>
+            
+            <Footer/>         
         </div>
         
 
