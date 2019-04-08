@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+import {Link} from 'react-router-dom';
+
+=======
 import {Redirect, Link} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
+>>>>>>> 76074c0281ea12331f83b4850f40a4f9655aa98e
 import Header from './../../generics/header/Header';
 import Footer from './../../generics/footer/Footer';
 
@@ -42,6 +47,20 @@ class Catalogo extends Component {
     constructor(){
         super();
         this.state = {
+<<<<<<< HEAD
+          things:[],
+          isLoading: false,
+          error: false,
+        }
+    }
+
+    render() {
+    return (
+        <div>
+            <Header/>
+            <div className="card">
+                <h1>Catalogo</h1>
+=======
           productos:[],
           isLoading: false,
           error: false,
@@ -97,6 +116,7 @@ class Catalogo extends Component {
                     </div>
                 </div>
                 
+<<<<<<< HEAD
                 { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
 
                 
@@ -116,6 +136,10 @@ class Catalogo extends Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>         
+=======
+                <Footer/>         
+>>>>>>> 76074c0281ea12331f83b4850f40a4f9655aa98e
+>>>>>>> e87ca24c7ab1a7c936137e5b85a42b8974793315
             </div>
         );
     };
