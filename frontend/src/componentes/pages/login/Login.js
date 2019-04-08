@@ -5,6 +5,7 @@ import "./Login.css";
 import axios from 'axios';
 
 class Login extends Component {
+    //Lo primero que se ejecuta. (constructor)
     constructor(){
         super();
         this.state = {
@@ -13,7 +14,8 @@ class Login extends Component {
         }
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
-    }
+    }//constructor.
+
     render() {
     return (
         <div>
@@ -50,16 +52,18 @@ class Login extends Component {
     );
     };
 
+    //Almacena lo que el usuario escribio.
     onChangeHandler(e){
         const { name, value } = e.currentTarget;
         this.setState({...this.state, [name]:value});
-    };
+    };//onChange.
 
+    //Verifica que el usuario y la contrasena sean correctas.
     onClickHandler(e){
         axios.post('/api/usuarios/login',
-        {...this.state}).then(response => {
-            console.log(response);
+        {...this.state}).then(resp => {
+            console.log(resp);
         }).catch(err => console.log(err));
-    };
+    };//onClick.
 };
 export default Login;
