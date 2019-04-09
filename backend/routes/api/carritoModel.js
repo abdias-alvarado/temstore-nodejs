@@ -40,5 +40,5 @@ function carritoModel(db){
 
 
   return lib;
-} // carritoModel
+} // Modelo carrito
  module.exports = carritoModel;

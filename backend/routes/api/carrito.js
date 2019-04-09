@@ -23,10 +23,11 @@ var carritoFormat = {
 router.get('/:cliente', function( req, res, next) {
 
   carritoModel.getCarrito(req.params.cliente,
+    
     function(err, docs){
       if(err) {
         console.log(err);
-        return res.status(500).json({error:"Ha sucedido un error."});
+        return res.status(500).json({error:"Ha ocurrido un error."});
       }
       return res.status(200).json(docs);
     }
@@ -44,20 +45,21 @@ router.post('/agregar', function(req, res, next){
   carritoModel.addCarrito(carrito, (err, resultado)=>{
     if(err){
       console.log(err);
-      return res.status(500).json({"error":"No se pudo agregar el producto al carrito."});
+      return res.status(500).json({"error":"Ha ocurrido un error al momento de agregar el producto al carrito."});
     }
     return res.status(200).json(resultado);
-  });// nuevoProducto
+  });// nuevo Producto
 });
 
 router.delete('/eliminar/:idcarrito', function(req, res, next){
   var id = req.params.idcarrito;
+
   carritoModel.deleteCarrito(id, (err, resultado)=>{
     if(err){
-      return res.status(500).json({"error":"No se ha podido eliminar el producto del carrito."});
+      return res.status(500).json({"error":"Ha ocurrido un error al momento de eliminar el producto del carrito."});
     }
     return res.status(200).json(resultado);
-  }); // deleteCarrito
+  }); // eliminar Carrito
 }); 
 
 return router;
