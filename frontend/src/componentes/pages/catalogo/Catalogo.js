@@ -59,8 +59,7 @@ class Catalogo extends Component {
           })
           .catch( (err)=>{
             alert(err);
-          })
-        ;
+          });
     }
     
     render() {

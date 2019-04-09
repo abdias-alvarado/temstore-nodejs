@@ -7,12 +7,29 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 
 import logo from '../../../images/logo.png';
-
+import axios from 'axios';
 import "./Header.css";
 
 class Header extends Component {
+  constructor(){
+    super();
+    this.state = {
+      cliente: localStorage.getItem('cliente')
+    }
+  
+}
+componentDidMount(){
+    axios.get(`/api/carrito/${this.state.cliente}`)
+      .then( (resp)=>{
+        localStorage.setItem('cantidad', resp.data.length);
+      })
+      .catch( (err)=>{
+        alert(err);
+      })
+    ;
+}
 
-    render() {
+  render() {
     let cantidadCarrito = localStorage.getItem('cantidad');
     return (
       <div className="row clearfix">     
