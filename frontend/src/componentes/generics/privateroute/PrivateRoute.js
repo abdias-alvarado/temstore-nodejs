@@ -5,7 +5,7 @@ function PrivateRoute( {component: Component, ...rest} ){
   return (
     <Route
       {...rest}
-      render={ (props) => { return auth.isAuthenticated ?
+      render={ (props) => { return localStorage.getItem('autorizado') ?
           (<Component {...props}/>) :
           (<Redirect to={{pathname:"/login", state:{ from: props.location}}} />);
        }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import {Redirect, Link} from 'react-router-dom';
 import { MDBBtn } from 'mdbreact';
 import logo from '../../../images/logo.png';
 import "./Login.css";
 import axios from 'axios';
+import Catalogo from '../catalogo/Catalogo';
 
 class Login extends Component {
     //Lo primero que se ejecuta. (constructor)
@@ -17,14 +19,26 @@ class Login extends Component {
     }//constructor.
 
     render() {
+    
+    if (localStorage.getItem('autorizado') === 'true'){
+        if(typeof this.props.location.state === "undefined")
+        {
+          return (<Redirect to={'/catalogo'} />);
+        }
+        else{
+          return (<Redirect to={this.props.location.state.from.pathname} />);
+        }
+         
+    }
     return (
         <div>
             <br/>
-            <img src={logo} alt="Logo" width="100px"></img>
             <h2>TEM STORE HN</h2>
+            <img src={logo} alt="Logo" width="100px"></img>
             <br/>
             <br/>  
             <h4 className="font-fix-header">Iniciar sesión</h4>
+            <br/>
             <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
             Usuario
             </label>
@@ -60,10 +74,26 @@ class Login extends Component {
 
     //Verifica que el usuario y la contrasena sean correctas.
     onClickHandler(e){
+        e.preventDefault();
+        e.stopPropagation();
+
         axios.post('/api/usuarios/login',
-        {...this.state}).then(resp => {
-            console.log(resp);
-        }).catch(err => console.log(err));
-    };//onClick.
+        {...this.state}).then((resp)=>{
+            alert(resp.data.msg);
+            if(resp.data.msg === "Ingresado correctamente."){
+              this.props.auth.setAuthState(
+                {
+                  "isAuthenticated": true,
+                  "user": this.state.email,
+                  "firstVerified": true
+                }
+              );
+              this.setState({"redirecto": true});
+              localStorage.setItem('autorizado', 'true');
+            }
+          }).catch( (err) => {
+            alert(err);
+          } );
+    };
 };
 export default Login;
