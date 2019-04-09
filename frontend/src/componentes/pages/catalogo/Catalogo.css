@@ -51,10 +51,24 @@ h3{
 
 .btn-new{
     border-radius: 50%;
-    width: 60px; 
-    height: 60px;                                          
-    position: relative;                                   
-    margin-bottom: 10px;                                                    
-    margin-right: 10px;
+    width: 3vw; 
+    height: 3vw;  
+
+    position: fixed;                                   
     border: 0px;
+    top: 15%;
+    float: right;
+}
+
+@media only screen and (max-width: 980px) {
+    .btn-new{
+        border-radius: 50%;
+        width: 40px; 
+        height: 40px;  
+    
+        position: relative;                                   
+        border: 0px;
+        top: 20%;
+        float: right;
+    }
 }

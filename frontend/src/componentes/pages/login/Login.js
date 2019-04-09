@@ -90,6 +90,7 @@ class Login extends Component {
               );
               this.setState({"redirecto": true});
               localStorage.setItem('autorizado', 'true');
+              localStorage.setItem('cliente', this.state.email);
             }
           }).catch( (err) => {
             alert(err);

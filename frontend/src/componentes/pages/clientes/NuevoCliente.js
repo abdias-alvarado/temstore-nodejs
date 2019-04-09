@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
-import "./Catalogo.css";
+import "./clientes.css";
 import Header from '../../generics/header/Header';
 import { MDBBtn } from 'mdbreact';
 
-class nuevoProducto extends Component {
+class NuevoCliente extends Component {
     
     constructor(){
         super();
         this.state = {
-            precio: '',
             nombre: '',
-            descripcion: '',
-            categoria: ''
+            rtn: '',
+            telefono: '',
+            edad: ''
         }
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -25,9 +25,9 @@ class nuevoProducto extends Component {
             <div>
                 <Header/>
                 <br/>
-                <h2>Nuevo Producto</h2>
+                <h2>Nuevo Cliente</h2>
                 <label htmlFor="input-nombre" className="grey-text">
-                Nombre del producto:
+                Nombre del cliente:
                 </label>
                 <input
                 type="text"
@@ -37,37 +37,38 @@ class nuevoProducto extends Component {
                 name="nombre"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
-                <label htmlFor="input-descripcion" className="grey-text">
-                Descripción
+                <label htmlFor="input-rtn" className="grey-text">
+                RTN
                 </label>
-                <textarea
-                id="input-descripcion"
-                name="descripcion"
+                <input
+                id="input-rtn"
+                name="rtn"
+                maxLength="14"
                 style={{marginLeft: 33+"%"}}
                 className="md-textarea form-control col-4" 
                 rows="3"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 >
-                </textarea>
-                <label htmlFor="input-categoria" className="grey-text">
-                Categoria:
-                </label>
-                <input
-                type="text"
-                name="categoria"
-                style={{marginLeft: 33+"%"}}
-                id="input-categoria"
-                className="form-control col-4"
-                onChange={(e) => { this.onChangeHandler(e) }}
-                />
-                <label htmlFor="input-categoria" className="grey-text">
-                Precio:
+                </input>
+                <label htmlFor="input-edad" className="grey-text">
+                Edad:
                 </label>
                 <input
                 type="number"
-                name="precio"
+                name="edad"
                 style={{marginLeft: 33+"%"}}
-                id="input-categoria"
+                id="input-edad"
+                className="form-control col-4"
+                onChange={(e) => { this.onChangeHandler(e) }}
+                />
+                <label htmlFor="input-telefono" className="grey-text">
+                Telefono:
+                </label>
+                <input
+                type="text"
+                name="telefono"
+                style={{marginLeft: 33+"%"}}
+                id="input-telefono"
                 className="form-control col-4"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
@@ -79,12 +80,12 @@ class nuevoProducto extends Component {
     };
 
     onClickHandler(e){
-        if(this.state.precio === '' || this.state.nombre === '' || this.state.descripcion === '' || this.state.categoria === ''){
-            console.log("verifique los campos");
+        if(this.state.nombre === '' || this.state.rtn === '' || this.state.edad === '' || this.state.telefono === ''){
+            alert("Verifique los Campos.");
             return;
         }
-        axios.post('/api/productos/nuevo', {...this.state}).then(resp => {
-            window.location = '/catalogo'
+        axios.post('/api/clientes/nuevo', {...this.state}).then(resp => {
+            window.location = '/clientes'
         }).catch(exc => { throw exc; })
     };
 
@@ -94,4 +95,4 @@ class nuevoProducto extends Component {
     }
 };
 
-export default nuevoProducto;
+export default NuevoCliente;

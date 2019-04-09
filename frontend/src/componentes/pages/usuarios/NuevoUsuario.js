@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from 'axios';
-import "./clientes.css";
+
 import Header from '../../generics/header/Header';
 import { MDBBtn } from 'mdbreact';
 
-class nuevoCliente extends Component {
+class NuevoUsuario extends Component {
     
     constructor(){
         super();
         this.state = {
             nombre: '',
-            rtn: '',
-            telefono: '',
-            edad: ''
+            email: '',
+            password: '',
+            repit: ''
         }
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -25,9 +25,9 @@ class nuevoCliente extends Component {
             <div>
                 <Header/>
                 <br/>
-                <h2>Nuevo Cliente</h2>
+                <h2>Nuevo Usuario</h2>
                 <label htmlFor="input-nombre" className="grey-text">
-                Nombre del cliente:
+                Nombre:
                 </label>
                 <input
                 type="text"
@@ -37,38 +37,38 @@ class nuevoCliente extends Component {
                 name="nombre"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
-                <label htmlFor="input-rtn" className="grey-text">
-                RTN
+                <label htmlFor="input-email" className="grey-text">
+                Email:
                 </label>
                 <input
-                id="input-rtn"
-                name="rtn"
-                maxLength="14"
+                id="input-email"
+                type="email"
+                name="email"
                 style={{marginLeft: 33+"%"}}
                 className="md-textarea form-control col-4" 
                 rows="3"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 >
                 </input>
-                <label htmlFor="input-edad" className="grey-text">
-                Edad:
+                <label htmlFor="input-password" className="grey-text">
+                Contraseña:
                 </label>
                 <input
-                type="number"
-                name="edad"
+                type="password"
+                name="password"
                 style={{marginLeft: 33+"%"}}
-                id="input-edad"
+                id="input-password"
                 className="form-control col-4"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
-                <label htmlFor="input-telefono" className="grey-text">
-                Telefono:
+                <label htmlFor="input-repit" className="grey-text">
+                Repita su Contraseña:
                 </label>
                 <input
-                type="text"
-                name="telefono"
+                type="password"
+                name="repit"
                 style={{marginLeft: 33+"%"}}
-                id="input-telefono"
+                id="input-repit"
                 className="form-control col-4"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
@@ -84,8 +84,15 @@ class nuevoCliente extends Component {
             alert("Verifique los Campos.");
             return;
         }
-        axios.post('/api/clientes/nuevo', {...this.state}).then(resp => {
-            window.location = '/clientes'
+
+        if(this.state.password !== this.state.repit)
+        {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        axios.post('/api/usuarios/nuevo', {...this.state}).then(resp => {
+            window.location = '/administrar'
         }).catch(exc => { throw exc; })
     };
 
@@ -95,4 +102,4 @@ class nuevoCliente extends Component {
     }
 };
 
-export default nuevoCliente;
+export default NuevoUsuario;

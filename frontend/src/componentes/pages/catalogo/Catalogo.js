@@ -64,18 +64,17 @@ class Catalogo extends Component {
     }
     
     render() {
-      
         let listItems = [];
         if(this.state.productos.length > 0 ){
             listItems = this.state.productos.map((o, i)=>{
                 return (
                 <div>
-                    <CardProducto {...o} /> 
                     <div className="acciones">
                         <button name="editar" data-id={o._id} className="btn btn-sm btn-warning" onClick={this.onClickHandler}><i className="fas fa-pen"></i></button>
                         <button name="comprar" data-id={o._id} className="btn btn-sm btn-success" onClick={this.onClickHandler}><i className="fas fa-shopping-cart"></i></button>
                         <button name="borrar" data-id={o._id} className="btn btn-sm btn-danger" onClick={this.onClickHandler}><i className="fas fa-trash"></i></button>
                     </div>
+                    <CardProducto {...o} /> 
                     <hr/>
                 </div>);
             });
@@ -83,12 +82,6 @@ class Catalogo extends Component {
         return (
             <div>
                 <Header/>
-                <div>
-                    <h3><b>Catálogo</b></h3>
-                </div>
-                <div>
-                    {listItems}
-                </div>
                 <div className="row">
                     <div className="col-md-5"></div>
                     <div className="col-md-5"></div>
@@ -96,8 +89,15 @@ class Catalogo extends Component {
                         <button name="nuevo" className="badge badge-pill badge-success btn-new" onClick={this.onClickHandler}><i className="fas fa-plus"></i></button>
                     </div>
                 </div>
+                <div>
+                    <h3><b>Catálogo</b></h3>
+                </div>
+                <div>
+                    {listItems}
+                </div>
                 
-                { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
+                
+                { (this.state.isLoading)? <div className='bouncingLoader'></div>: null }
 
                 
                 

@@ -62,12 +62,12 @@ class Clientes extends Component {
             listItems = this.state.Clientes.map((o, i)=>{
                 return (
                 <div>
-                    <CardClientes {...o} /> 
                     <div className="acciones">
                         <button name="editar" data-id={o._id} className="btn btn-sm btn-warning" onClick={this.onClickHandler}><i className="fas fa-pen"></i></button>
-                        <button name="comprar" data-id={o._id} className="btn btn-sm btn-success" onClick={this.onClickHandler}><i className="fas fa-shopping-cart"></i></button>
+                        <button name="comprar" data-id={o.nombre} className="btn btn-sm btn-primary" onClick={this.onClickHandler}><i className="fas fa-shopping-cart"></i></button>
                         <button name="borrar" data-id={o._id} className="btn btn-sm btn-danger" onClick={this.onClickHandler}><i className="fas fa-trash"></i></button>
                     </div>
+                    <CardClientes {...o} /> 
                     <hr/>
                 </div>);
             });
@@ -75,12 +75,6 @@ class Clientes extends Component {
         return (
             <div>
                 <Header/>
-                <div>
-                    <h3><b>Clientes</b></h3>
-                </div>
-                <div>
-                    {listItems}
-                </div>
                 <div className="row">
                     <div className="col-md-5"></div>
                     <div className="col-md-5"></div>
@@ -88,8 +82,14 @@ class Clientes extends Component {
                         <Link to="nuevocliente"><button className="badge badge-pill badge-success btn-new"><i className="fas fa-plus align-middle"></i></button></Link>                      
                     </div>
                 </div>
+                <div>
+                    <h3><b>Clientes</b></h3>
+                </div>
+                <div>
+                    {listItems}
+                </div>
 
-                { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
+                { (this.state.isLoading)? <div className='bouncingLoader'></div>: null }
                 
                 <Footer/>         
             </div>
@@ -110,6 +110,11 @@ class Clientes extends Component {
             }).catch( (err) => {
                 alert(err);
             } );
+        }
+        else if (accion == "comprar")
+        {
+            localStorage.setItem('cliente', idcliente);
+            window.location = '/catalogo';
         }
         
         /*

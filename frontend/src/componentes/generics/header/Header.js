@@ -33,8 +33,8 @@ class Header extends Component {
             <Nav>
                 
                 <NavDropdown title="Opciones" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Nuevo Usuario</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Ver Carrito</NavDropdown.Item>
+                  <NavDropdown.Item href=""><Link className="text-black" to="nuevousuario">Nuevo Usuario</Link></NavDropdown.Item>
+                  <NavDropdown.Item href=""><Link className="text-black" to="carrito">Ver Carrito</Link></NavDropdown.Item>
                   <NavDropdown.Divider />
                 
                   <NavDropdown.Item href="#"><Link to="salir">Cerrar Sesión</Link></NavDropdown.Item>

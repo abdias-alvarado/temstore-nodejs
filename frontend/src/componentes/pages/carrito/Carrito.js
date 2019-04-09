@@ -13,6 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 import FloatingButton from '../../generics/addbutton/FloatingButton';
 
 import "./Carrito.css";
+import NuevoUsuario from '../usuarios/NuevoUsuario';
 
 const columns = [
     {
@@ -72,7 +73,7 @@ class Carrito extends Component {
           error: false,
           show: false,
           suma: 0.00,
-          cliente: 'Jorge Paz'
+          cliente: localStorage.getItem('cliente')
         }
         this.onClickHandler = this.onClickHandler.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -125,7 +126,7 @@ class Carrito extends Component {
                     <div className="col-md-2"></div>
                 </div>
 
-                { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
+                { (this.state.isLoading)? <div className='bouncingLoader'></div>: null }
 
                 
                 
