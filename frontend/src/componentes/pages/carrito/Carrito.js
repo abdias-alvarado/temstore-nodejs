@@ -110,7 +110,7 @@ class Carrito extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Eliminar Producto</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>¿Está seguro que desea eliminar el producto?</Modal.Body>
+                    <Modal.Body>¿Está seguro de desear eliminar el producto?</Modal.Body>
                     <Modal.Footer>
                         <Button variant="default" onClick={this.handleClose}>
                         Cancelar
