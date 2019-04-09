@@ -23,6 +23,7 @@ var carritoFormat = {
 router.get('/:cliente', function( req, res, next) {
 
   carritoModel.getCarrito(req.params.cliente,
+    
     function(err, docs){
       if(err) {
         console.log(err);
@@ -50,6 +51,7 @@ router.get('/producto/:producto', function( req, res, next) {
  * INSERCIONES Y MODIFICACIONES
  */
 router.post('/agregar', function(req, res, next){
+<<<<<<< HEAD
  carritoModel.getCarritoProducto(req.body.producto,
                 function(err, docs){
                   if(err) {
@@ -88,16 +90,30 @@ router.post('/agregar', function(req, res, next){
               )    
   
   
+=======
+  var carrito = Object.assign({} , carritoFormat, req.body);
+  var subtotal = parseInt(carrito.cantidad) * parseFloat(carrito.precio);
+  carrito.subtotal = subtotal;
+ 
+  carritoModel.addCarrito(carrito, (err, resultado)=>{
+    if(err){
+      console.log(err);
+      return res.status(500).json({"error":"Ha ocurrido un error al momento de agregar el producto al carrito."});
+    }
+    return res.status(200).json(resultado);
+  });// nuevo Producto
+>>>>>>> 2cf1847166cdbfba653fc0ab3120548fb35e135e
 });
 
 router.delete('/eliminar/:idcarrito', function(req, res, next){
   var id = req.params.idcarrito;
+
   carritoModel.deleteCarrito(id, (err, resultado)=>{
     if(err){
-      return res.status(500).json({"error":"No se ha podido eliminar el producto del carrito."});
+      return res.status(500).json({"error":"Ha ocurrido un error al momento de eliminar el producto del carrito."});
     }
     return res.status(200).json(resultado);
-  }); // deleteCarrito
+  }); // eliminar Carrito
 }); 
 
 return router;
