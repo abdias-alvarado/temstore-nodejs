@@ -14,37 +14,52 @@ import FloatingButton from '../../generics/addbutton/FloatingButton';
 import "./Carrito.css";
 
 const columns = [
-  {
-    name: 'Nombre',
-    selector: 'nombre',
-    sortable: true,
-  },
-  {
-    name: 'Descripcion',
-    selector: 'descripcion',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Categoria',
-    selector: 'categoria',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Precio',
-    selector: 'precio',
-    sortable: true,
-    right: true,
-  },
+    {
+        name: 'Cliente',
+        selector: 'cliente',
+        sortable: true,
+    },
+    {
+        name: 'Producto',
+        selector: 'producto',
+        sortable: true,
+    },
+    {
+        name: 'Descripcion',
+        selector: 'descripcion',
+        sortable: true,
+        right: true,
+    },
+    {
+        name: 'Categoria',
+        selector: 'categoria',
+        sortable: true,
+        right: true,
+    },
+    {
+        name: 'Precio',
+        selector: 'precio',
+        sortable: true,
+        right: true,
+    },
+    {
+        name: 'Cantidad',
+        selector: 'cantidad',
+        sortable: true,
+        right: true,
+    },
+    {
+        name: 'Subtotal',
+        selector: 'subtotal',
+        sortable: true,
+        right: true,
+    },
 ];
 
 const handleChange = (state) => {
     // You can use setState or dispatch with something like Redux so we can use the retrieved data
     console.log('Selected Rows: ', state.selectedRows);
   };
-
-
 
 
 class Carrito extends Component {
@@ -55,7 +70,8 @@ class Carrito extends Component {
           isLoading: false,
           error: false,
           show: false,
-          suma: 0.00
+          suma: 0.00,
+          cliente: 'Jorge Paz'
         }
         this.onClickHandler = this.onClickHandler.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -63,7 +79,7 @@ class Carrito extends Component {
     }
     componentDidMount(){
         this.setState({isLoading:true});
-        axios.get('/api/productos')
+        axios.get(`/api/carrito/${this.state.cliente}`)
           .then( (resp)=>{
             this.setState({carrito:resp.data, isLoading:false});
           })
@@ -74,6 +90,13 @@ class Carrito extends Component {
     }
     
     render() {
+        let listItems = [];
+        localStorage.setItem('cantidad', this.state.carrito.length);
+        if(this.state.carrito.length > 0 ){
+            listItems = this.state.carrito.map((o, i)=>{
+                this.state.suma = this.state.suma + o.subtotal;
+            });
+        }
         return (
             <div>
                 <Header/>
@@ -84,6 +107,7 @@ class Carrito extends Component {
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
                         <DataTable
+                            title={this.state.cliente}
                             columns={columns}
                             data={this.state.carrito}
                             selectableRows // add for checkbox selection
@@ -95,7 +119,7 @@ class Carrito extends Component {
                 <div className="row mt-5">
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
-                        <h5 className="mr-5" align="right">Total: L.<span>{this.state.suma}</span></h5>
+                        <h5 className="mr-5" align="right">Total: L.<span>{parseFloat(this.state.suma).toFixed(2)}</span></h5>
                     </div>
                     <div className="col-md-2"></div>
                 </div>
@@ -126,12 +150,12 @@ class Carrito extends Component {
     onClickHandler(e){
         e.preventDefault();
         e.stopPropagation();
-        let idproducto = e.target.getAttribute('data-id');
+        let idcarrito = e.target.getAttribute('data-id');
         let accion = e.target.name;
 
         if (accion == "borrar")
         {
-            axios.delete(`/api/productos/eliminar/${idproducto}`)
+            axios.delete(`/api/carrito/eliminar/${idcarrito}`)
             .then((resp)=>{
                 window.location = '/carrito';          
             }).catch( (err) => {

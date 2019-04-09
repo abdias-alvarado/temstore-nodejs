@@ -140,6 +140,12 @@ class Catalogo extends Component {
         {
             //this.setState({ show: true });
         }
+        else if (accion == "comprar")
+        {
+            var qtty = parseInt(localStorage.getItem('cantidad')) + 1;
+            localStorage.setItem('cantidad', qtty);
+            window.location = '/catalogo';
+        }
 
 
         /*

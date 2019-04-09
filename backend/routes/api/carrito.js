@@ -12,9 +12,9 @@ var carritoFormat = {
   'producto':'',
   'descripcion':'',
   'categoria':'',
-  'precio':null,
-  'cantidad': null,
-  'subtotal': null
+  'precio':0,
+  'cantidad': 0,
+  'subtotal': 0
 };
 
 /**
@@ -33,21 +33,61 @@ router.get('/:cliente', function( req, res, next) {
   ); // getCarrito
 });
 
+router.get('/producto/:producto', function( req, res, next) {
+
+  carritoModel.getCarritoProducto(req.params.producto,
+    function(err, docs){
+      if(err) {
+        console.log(err);
+        return res.status(500).json({error:"Ha ocurrido un error."});
+      }
+      return res.status(200).json(docs);
+    }
+  ); // getCarrito
+});
+
 /**
  * INSERCIONES Y MODIFICACIONES
  */
 router.post('/agregar', function(req, res, next){
-  var carrito = Object.assign({} , carritoFormat, req.body);
-  var subtotal = parseInt(carrito.cantidad) * parseFloat(carrito.precio);
-  carrito.subtotal = subtotal;
- 
-  carritoModel.addCarrito(carrito, (err, resultado)=>{
-    if(err){
-      console.log(err);
-      return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});
-    }
-    return res.status(200).json(resultado);
-  });// nuevoProducto
+ carritoModel.getCarritoProducto(req.body.producto,
+                function(err, docs){
+                  if(err) {
+                    console.log(err);
+                    return res.status(500).json({error:"Ha ocurrido un error."});
+                  }
+                  else{
+                    var cantidad = docs.length;
+                    if(cantidad > 0)
+                    {
+                      carritoModel.updateCarrito(req.body.producto, req.body.precio, (err, resultado)=>{
+                        if(err){
+                          console.log(err);
+                          return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});
+                        }
+                        return res.status(200).json(resultado);
+                      });
+                    }else{
+                      var carrito = Object.assign({} , carritoFormat, req.body);  
+                      var subtotal = parseInt(carrito.cantidad) * parseFloat(carrito.precio);
+                      carrito.subtotal = subtotal;
+                    
+                      carritoModel.addCarrito(carrito, (err, resultado)=>{
+                        if(err){
+                          console.log(err);
+                          return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});
+                        }
+                        return res.status(200).json(resultado);
+                      });// nuevoProducto
+                    }
+
+                    return cantidad;
+                  }
+                  
+                }
+              )    
+  
+  
 });
 
 router.delete('/eliminar/:idcarrito', function(req, res, next){

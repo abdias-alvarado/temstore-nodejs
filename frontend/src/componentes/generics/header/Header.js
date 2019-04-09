@@ -13,6 +13,7 @@ import "./Header.css";
 class Header extends Component {
 
     render() {
+    let cantidadCarrito = localStorage.getItem('cantidad');
     return (
       <div className="row clearfix">     
           <Navbar collapseOnSelect className="header justify-content-between" expand="lg" bg="dark" variant="dark">
@@ -25,7 +26,7 @@ class Header extends Component {
 
               <Nav.Link href="#"><Link className="text-white" to="clientes">Clientes</Link></Nav.Link>
               <Nav.Link href="#"><Link className="text-white" to="catalogo">Catálogo</Link></Nav.Link>
-              <Nav.Link href="#"><Link className="text-white" to="carrito">Carrito</Link><span class="badge badge-light align-middle counter">0</span></Nav.Link>
+              <Nav.Link href="#"><Link className="text-white" to="carrito">Carrito</Link><span class="badge badge-light align-middle counter">{cantidadCarrito}</span></Nav.Link>
 
               
             </Nav>

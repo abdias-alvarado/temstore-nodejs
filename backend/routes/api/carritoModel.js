@@ -16,7 +16,20 @@ function carritoModel(db){
     );
   }
 
+  lib.getCarritoProducto = (producto, handler)=>{
+    carrito.find({"producto": producto}).toArray(
+      (err , docs) => {
+        if(err){
+          handler(err, null);
+        }else{
+          handler(null, docs);
+        }
+      }
+  );
+  }
+
   lib.addCarrito = (nuevoCarrito, handler)=>{
+    nuevoCarrito.cantidad = parseInt(nuevoCarrito.cantidad);
     carrito.insertOne(nuevoCarrito, (err, r)=>{
       if(err){
         handler(err, null);
@@ -33,6 +46,20 @@ function carritoModel(db){
         handler(err, null);
       } else {
         handler(null, result.result);
+      }
+    });
+  
+  }
+
+  lib.updateCarrito = (producto, precio, handler) => {
+    var filter = {"producto":producto};
+    var updateStatement = {$inc :{cantidad: 1, subtotal: parseFloat(precio)}};
+  
+    carrito.updateOne(filter, updateStatement, (err, doc) => {
+      if(err) {
+        handler(err, null);
+      } else {
+        handler(null, doc);
       }
     });
   
