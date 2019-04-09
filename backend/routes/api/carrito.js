@@ -26,7 +26,7 @@ router.get('/:cliente', function( req, res, next) {
     function(err, docs){
       if(err) {
         console.log(err);
-        return res.status(500).json({error:"Ha ocurrido un error."});
+        return res.status(500).json({error:"Ha sucedido un error."});
       }
       return res.status(200).json(docs);
     }
@@ -44,7 +44,7 @@ router.post('/agregar', function(req, res, next){
   carritoModel.addCarrito(carrito, (err, resultado)=>{
     if(err){
       console.log(err);
-      return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});
+      return res.status(500).json({"error":"No se pudo agregar el producto al carrito."});
     }
     return res.status(200).json(resultado);
   });// nuevoProducto

@@ -47,7 +47,7 @@ const handleChange = (state) => {
 
 
 
-
+  
 class Carrito extends Component {
     constructor(){
         super();
