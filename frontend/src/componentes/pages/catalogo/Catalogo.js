@@ -12,6 +12,17 @@ import FloatingButton from '../../generics/addbutton/FloatingButton';
 
 import "./Catalogo.css";
 
+function formatearNumero(nStr) {
+    nStr += '';
+    let x = nStr.split('.');
+    let x1 = x[0];
+    let x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
  
 function CardProducto(props){            
     return(
@@ -27,7 +38,7 @@ function CardProducto(props){
                 <div className="detalles">
                     <p className="pull-left"><b>Descripción: </b> {props.descripcion}</p>
                     <p className="pull-left"><b>Categoría: </b> <span className="badge badge-pill badge-info">{props.categoria}</span></p>
-                    <p className="pull-left"><b>Precio: </b> L.{props.precio}</p>
+                    <p className="pull-left"><b>Precio: </b> L.{formatearNumero(props.precio)}</p>
                 </div>
             </div>
         </div>
@@ -126,7 +137,7 @@ class Catalogo extends Component {
         let idproducto = e.target.getAttribute('data-id');
         let accion = e.target.name;
 
-        if (accion == "borrar")
+        if (accion === "borrar")
         {
             axios.delete(`/api/productos/eliminar/${idproducto}`)
             .then((resp)=>{
@@ -135,16 +146,21 @@ class Catalogo extends Component {
                 alert(err);
             } );
         }
-        else if (accion == "nuevo")
+        else if (accion === "nuevo")
         {
             window.location = '/nuevoproducto';
             //this.setState({ show: true });
         }
-        else if (accion == "comprar")
+        else if (accion === "comprar")
         {
             var qtty = parseInt(localStorage.getItem('cantidad')) + 1;
             localStorage.setItem('cantidad', qtty);
             window.location = '/catalogo';
+        }
+        else if (accion === "editar")
+        {
+            localStorage.setItem('producto', idproducto);
+            window.location = '/editarproducto';
         }
 
 

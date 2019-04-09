@@ -103,7 +103,7 @@ class Clientes extends Component {
         let idcliente = e.target.getAttribute('data-id');
         let accion = e.target.name;
 
-        if (accion == "borrar")
+        if (accion === "borrar")
         {
             axios.delete(`/api/clientes/eliminar/${idcliente}`)
             .then((resp)=>{
@@ -112,10 +112,15 @@ class Clientes extends Component {
                 alert(err);
             } );
         }
-        else if (accion == "comprar")
+        else if (accion === "comprar")
         {
             localStorage.setItem('cliente', idcliente);
             window.location = '/catalogo';
+        }
+        else if (accion === "editar")
+        {
+            localStorage.setItem('clienteEdit', idcliente);
+            window.location = '/editarcliente';
         }
         
         /*

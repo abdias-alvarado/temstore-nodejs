@@ -7,7 +7,7 @@ import Header from '../../generics/header/Header';
 import Footer from '../../generics/footer/Footer';
 import { MDBBtn } from 'mdbreact';
 
-class NuevoProducto extends Component {
+class EditarProducto extends Component {
     
     constructor(){
         super();
@@ -20,13 +20,29 @@ class NuevoProducto extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
     }
+
+    componentDidMount(){
+        this.setState({isLoading:true});
+        axios.get(`/api/productos/producto/${localStorage.getItem('producto')}`)
+          .then( (resp)=>{
+            this.setState(
+                {nombre:resp.data.nombre, 
+                precio:resp.data.precio, 
+                descripcion:resp.data.categoria, 
+                categoria: resp.data.categoria,
+                isLoading:false});
+          })
+          .catch( (err)=>{
+            alert(err);
+          });
+    }
     
     render() {
         return (
             <div>
                 <Header/>
                 <br/>
-                <h2>Nuevo Producto</h2>
+                <h2>Editar Producto</h2>
                 <label htmlFor="input-nombre" className="grey-text">
                 Nombre del producto:
                 </label>
@@ -36,6 +52,7 @@ class NuevoProducto extends Component {
                 id="input-nombre"
                 className="form-control col-4"
                 name="nombre"
+                value={this.state.nombre}
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
                 <label htmlFor="input-descripcion" className="grey-text">
@@ -44,6 +61,7 @@ class NuevoProducto extends Component {
                 <textarea
                 id="input-descripcion"
                 name="descripcion"
+                value={this.state.descripcion}
                 style={{marginLeft: 33+"%"}}
                 className="md-textarea form-control col-4" 
                 rows="3"
@@ -56,6 +74,7 @@ class NuevoProducto extends Component {
                 <input
                 type="text"
                 name="categoria"
+                value={this.state.categoria}
                 style={{marginLeft: 33+"%"}}
                 id="input-categoria"
                 className="form-control col-4"
@@ -67,6 +86,7 @@ class NuevoProducto extends Component {
                 <input
                 type="number"
                 name="precio"
+                value={parseFloat(this.state.precio)}
                 style={{marginLeft: 33+"%"}}
                 id="input-categoria"
                 className="form-control col-4"
@@ -85,7 +105,8 @@ class NuevoProducto extends Component {
             alert("Verifique los campos.");
             return;
         }
-        axios.post('/api/productos/nuevo', {...this.state}).then(resp => {
+        
+        axios.put(`/api/productos/actualizar/${localStorage.getItem('producto')}`, {...this.state}).then(resp => {
             window.location = '/catalogo'
         }).catch(exc => { throw exc; })
     };
@@ -96,4 +117,4 @@ class NuevoProducto extends Component {
     }
 };
 
-export default NuevoProducto;
+export default EditarProducto;

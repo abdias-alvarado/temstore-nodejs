@@ -12,7 +12,7 @@ var productoFormat = {
   'nombre':'',
   'descripcion':'',
   'categoria':'',
-  'precio':null,
+  'precio':0,
   'fechaIngreso': null
 };
 

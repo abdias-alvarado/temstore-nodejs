@@ -12,7 +12,7 @@ var clienteFormat = {
   'nombre':'',
   'rtn':'',
   'telefono':'',
-  'edad':null,
+  'edad':0,
   'fecha_ingreso': null
 };
 

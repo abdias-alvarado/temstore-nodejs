@@ -40,6 +40,7 @@ function productosModel(db){
 
 
   lib.addProducto = (nuevoProducto, handler)=>{
+    nuevoProducto.precio = parseFloat(nuevoProducto.precio);
     productos.insertOne(nuevoProducto, (err, r)=>{
       if(err){
         handler(err, null);
@@ -53,6 +54,7 @@ function productosModel(db){
   lib.updateProducto = (producto, id, handler) => {
     var filter = {"_id": ObjectId(id)};
     producto.fechaIngreso = new Date();
+    producto.precio = parseFloat(producto.precio);
     var updateStatement = {$set: producto}
     // get filered document
     productos.updateOne(filter, updateStatement, {upsert:true}, (err, doc) => {

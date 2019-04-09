@@ -8,14 +8,21 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import './App.css';
 import Login from './componentes/pages/login/Login';
+
 import Catalogo from './componentes/pages/catalogo/Catalogo';
 import ProductoNew from './componentes/pages/catalogo/NuevoProducto';
+import EditarProducto from './componentes/pages/catalogo/EditarProducto';
+
+import Clientes from './componentes/pages/clientes/Clientes';
 import ClienteNew from './componentes/pages/clientes/NuevoCliente';
+import EditarCliente from './componentes/pages/clientes/EditarCliente';
+
+import Usuarios from './componentes/pages/usuarios/Usuarios';
 import UsuarioNew from './componentes/pages/usuarios/NuevoUsuario';
+
 import Carrito from './componentes/pages/carrito/Carrito';
 import Salir from './componentes/generics/salir/Salir';
-import Clientes from './componentes/pages/clientes/Clientes';
-import Usuarios from './componentes/pages/usuarios/Usuarios';
+
 
 function Home() {
   return (<h1>Home</h1>);
@@ -46,6 +53,8 @@ class App extends Component {
               <Route path="/clientes" render={(p)=>(<Clientes {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <Route path="/usuarios" render={(p)=>(<Usuarios {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <Route path="/salir" render={(p)=>(<Salir {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
+              <Route path="/editarproducto" render={(p) => (<EditarProducto {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />
+              <Route path="/editarcliente" render={(p) => (<EditarCliente {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)}/>
               <Route path="/nuevoproducto" render={(p) => (<ProductoNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />
               <Route path="/nuevocliente" render={(p) => (<ClienteNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />          
               <Route path="/nuevousuario" render={(p) => (<UsuarioNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />          
