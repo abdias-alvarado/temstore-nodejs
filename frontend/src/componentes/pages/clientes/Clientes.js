@@ -24,7 +24,7 @@ function CardClientes(props){
                 <div className="detalles">
                     <p className="pull-left"><b>RTN: </b> {props.rtn}</p>
                     <p className="pull-left"><b>Telefono: </b> {props.telefono}</p>
-                    <p className="pull-left"><b>Edad: </b> L.{props.edad}</p>
+                    <p className="pull-left"><b>Edad: </b>{props.edad} años</p>
                 </div>
             </div>
         </div>
@@ -81,7 +81,15 @@ class Clientes extends Component {
                 <div>
                     {listItems}
                 </div>
-                { (this.state.isLoading)? "...Cargando": null }
+                <div className="row">
+                    <div className="col-md-5"></div>
+                    <div className="col-md-5"></div>
+                    <div className="col-md-2">
+                        <Link to="nuevocliente"><button className="badge badge-pill badge-success btn-new"><i className="fas fa-plus align-middle"></i></button></Link>                      
+                    </div>
+                </div>
+
+                { (this.state.isLoading)? "<div className='bouncingLoader'></div>": null }
                 
                 <Footer/>         
             </div>
@@ -103,7 +111,7 @@ class Clientes extends Component {
                 alert(err);
             } );
         }
-
+        
         /*
         axios.post('/api/usuarios/login',
         {...this.state}).then((resp)=>{

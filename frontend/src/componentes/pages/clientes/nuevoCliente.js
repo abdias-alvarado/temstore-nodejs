@@ -6,7 +6,7 @@ import "./clientes.css";
 import Header from '../../generics/header/Header';
 import { MDBBtn } from 'mdbreact';
 
-class nuevoProducto extends Component {
+class nuevoCliente extends Component {
     
     constructor(){
         super();
@@ -37,34 +37,35 @@ class nuevoProducto extends Component {
                 name="nombre"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
-                <label htmlFor="input-descripcion" className="grey-text">
+                <label htmlFor="input-rtn" className="grey-text">
                 RTN
                 </label>
-                <textarea
-                id="input-RTN"
-                name="RTN"
+                <input
+                id="input-rtn"
+                name="rtn"
+                maxLength="14"
                 style={{marginLeft: 33+"%"}}
                 className="md-textarea form-control col-4" 
                 rows="3"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 >
-                </textarea>
-                <label htmlFor="input-categoria" className="grey-text">
+                </input>
+                <label htmlFor="input-edad" className="grey-text">
                 Edad:
                 </label>
                 <input
-                type="text"
+                type="number"
                 name="edad"
                 style={{marginLeft: 33+"%"}}
                 id="input-edad"
                 className="form-control col-4"
                 onChange={(e) => { this.onChangeHandler(e) }}
                 />
-                <label htmlFor="input-edad" className="grey-text">
-                telefono:
+                <label htmlFor="input-telefono" className="grey-text">
+                Telefono:
                 </label>
                 <input
-                type="number"
+                type="text"
                 name="telefono"
                 style={{marginLeft: 33+"%"}}
                 id="input-telefono"
@@ -80,7 +81,7 @@ class nuevoProducto extends Component {
 
     onClickHandler(e){
         if(this.state.nombre === '' || this.state.rtn === '' || this.state.edad === '' || this.state.telefono === ''){
-            console.log("verifique los campos");
+            alert("Verifique los Campos.");
             return;
         }
         axios.post('/api/clientes/nuevo', {...this.state}).then(resp => {
