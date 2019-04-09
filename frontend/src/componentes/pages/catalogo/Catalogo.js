@@ -138,6 +138,7 @@ class Catalogo extends Component {
         }
         else if (accion == "nuevo")
         {
+            window.location = '/nuevoproducto';
             //this.setState({ show: true });
         }
         else if (accion == "comprar")

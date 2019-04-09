@@ -7,6 +7,7 @@ import axios from 'axios';
 import Catalogo from '../catalogo/Catalogo';
 
 class Login extends Component {
+    //Lo primero que se ejecuta. (constructor)
     constructor(){
         super();
         this.state = {
@@ -15,7 +16,8 @@ class Login extends Component {
         }
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
-    }
+    }//constructor.
+
     render() {
     
     if (localStorage.getItem('autorizado') === 'true'){
@@ -64,11 +66,13 @@ class Login extends Component {
     );
     };
 
+    //Almacena lo que el usuario escribio.
     onChangeHandler(e){
         const { name, value } = e.currentTarget;
         this.setState({...this.state, [name]:value});
-    };
+    };//onChange.
 
+    //Verifica que el usuario y la contrasena sean correctas.
     onClickHandler(e){
         e.preventDefault();
         e.stopPropagation();
