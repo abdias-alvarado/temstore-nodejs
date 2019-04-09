@@ -63,11 +63,6 @@ const handleChange = (state) => {
   };
 
 
-<<<<<<< HEAD
-=======
-
-  
->>>>>>> 2cf1847166cdbfba653fc0ab3120548fb35e135e
 class Carrito extends Component {
     constructor(){
         super();
