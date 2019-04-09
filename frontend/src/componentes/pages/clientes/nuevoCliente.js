@@ -79,12 +79,12 @@ class nuevoProducto extends Component {
     };
 
     onClickHandler(e){
-        if(this.state.precio === '' || this.state.nombre === '' || this.state.descripcion === '' || this.state.categoria === ''){
+        if(this.state.nombre === '' || this.state.rtn === '' || this.state.edad === '' || this.state.telefono === ''){
             console.log("verifique los campos");
             return;
         }
-        axios.post('/api/productos/nuevo', {...this.state}).then(resp => {
-            window.location = '/catalogo'
+        axios.post('/api/clientes/nuevo', {...this.state}).then(resp => {
+            window.location = '/clientes'
         }).catch(exc => { throw exc; })
     };
 
