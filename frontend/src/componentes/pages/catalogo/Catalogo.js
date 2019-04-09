@@ -69,7 +69,8 @@ class Catalogo extends Component {
             this.setState({productos:resp.data, isLoading:false});
           })
           .catch( (err)=>{
-            alert(err);
+            console.log(err);
+            
           });
     }
     
@@ -153,9 +154,28 @@ class Catalogo extends Component {
         }
         else if (accion === "comprar")
         {
-            var qtty = parseInt(localStorage.getItem('cantidad')) + 1;
-            localStorage.setItem('cantidad', qtty);
-            window.location = '/catalogo';
+            //var qtty = parseInt(localStorage.getItem('cantidad')) + 1;
+            //localStorage.setItem('cantidad', qtty);
+
+            axios.get(`/api/productos/producto/${idproducto}`)
+            .then( (resp)=>{
+                let cart = {};
+                cart.cliente = localStorage.getItem('cliente');
+                cart.cantidad = 1;
+                cart.producto = resp.data.nombre;
+                cart.descripcion = resp.data.descripcion;
+                cart.precio = resp.data.precio;
+                cart.categoria = resp.data.categoria;
+
+                axios.post(`api/carrito/agregar`, cart).then(resp => {
+                    alert("Producto agregado al carrito: "+ cart.producto);
+                    window.location = '/catalogo'
+                }).catch(exc => { throw exc; })
+            })
+            .catch( (err)=>{
+                alert(err);
+            });
+
         }
         else if (accion === "editar")
         {

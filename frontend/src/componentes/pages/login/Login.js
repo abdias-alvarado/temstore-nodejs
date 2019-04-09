@@ -93,7 +93,7 @@ class Login extends Component {
               localStorage.setItem('cliente', this.state.email);
             }
           }).catch( (err) => {
-            alert(err);
+             alert('Crendenciales incorrectas.');
           } );
     };
 };

@@ -4,6 +4,19 @@ function carritoModel(db){
   var lib = {};
   var carrito = db.collection('carrito');
 
+  
+  lib.getAll = (handler)=>{
+    carrito.find({}).toArray(
+        (err , docs) => {
+          if(err){
+            handler(err, null);
+          }else{
+            handler(null, docs);
+          }
+        }
+    );
+  }
+
   lib.getCarrito = (cliente, handler)=>{
     carrito.find({"cliente": cliente}).toArray(
         (err , docs) => {
@@ -16,8 +29,8 @@ function carritoModel(db){
     );
   }
 
-  lib.getCarritoProducto = (producto, handler)=>{
-    carrito.find({"producto": producto}).toArray(
+  lib.getCarritoProducto = (filtro, handler)=>{
+    carrito.find(filtro).toArray(
       (err , docs) => {
         if(err){
           handler(err, null);
@@ -51,8 +64,8 @@ function carritoModel(db){
   
   }
 
-  lib.updateCarrito = (producto, precio, handler) => {
-    var filter = {"producto":producto};
+  lib.updateCarrito = (producto, precio, cliente, handler) => {
+    var filter = {"producto":producto, "cliente": cliente};
     var updateStatement = {$inc :{cantidad: 1, subtotal: parseFloat(precio)}};
   
     carrito.updateOne(filter, updateStatement, (err, doc) => {

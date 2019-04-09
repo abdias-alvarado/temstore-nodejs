@@ -20,6 +20,20 @@ var carritoFormat = {
 /**
  * CONSULTAS A LA BASE DE DATOS
  */
+
+router.get('/', function( req, res, next) {
+
+  carritoModel.getAll(    
+    function(err, docs){
+      if(err) {
+        console.log(err);
+        return res.status(500).json({error:"Ha ocurrido un error."});
+      }
+      return res.status(200).json(docs);
+    }
+  ); // getCarrito
+});
+
 router.get('/:cliente', function( req, res, next) {
 
   carritoModel.getCarrito(req.params.cliente,
@@ -35,7 +49,6 @@ router.get('/:cliente', function( req, res, next) {
 });
 
 router.get('/producto/:producto', function( req, res, next) {
-
   carritoModel.getCarritoProducto(req.params.producto,
     function(err, docs){
       if(err) {
@@ -51,7 +64,8 @@ router.get('/producto/:producto', function( req, res, next) {
  * INSERCIONES Y MODIFICACIONES
  */
 router.post('/agregar', function(req, res, next){
- carritoModel.getCarritoProducto(req.body.producto,
+  var filtro = {"producto": req.body.producto, "cliente":req.body.cliente};
+ carritoModel.getCarritoProducto(filtro,
                 function(err, docs){
                   if(err) {
                     console.log(err);
@@ -61,7 +75,7 @@ router.post('/agregar', function(req, res, next){
                     var cantidad = docs.length;
                     if(cantidad > 0)
                     {
-                      carritoModel.updateCarrito(req.body.producto, req.body.precio, (err, resultado)=>{
+                      carritoModel.updateCarrito(req.body.producto, req.body.precio, req.body.cliente, (err, resultado)=>{
                         if(err){
                           console.log(err);
                           return res.status(500).json({"error":"No se ha podido agregar el producto al carrito."});

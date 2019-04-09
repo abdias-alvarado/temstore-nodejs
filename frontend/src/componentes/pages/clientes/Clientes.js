@@ -51,7 +51,7 @@ class Clientes extends Component {
             this.setState({Clientes:resp.data, isLoading:false});
           })
           .catch( (err)=>{
-            alert(err);
+            console.log(err);
           })
         ;
 

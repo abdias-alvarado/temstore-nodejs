@@ -24,7 +24,7 @@ componentDidMount(){
         localStorage.setItem('cantidad', resp.data.length);
       })
       .catch( (err)=>{
-        alert(err);
+        alert("No autorizado");
       })
     ;
 }
