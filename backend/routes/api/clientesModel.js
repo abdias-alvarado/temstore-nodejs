@@ -49,7 +49,6 @@ function clientesModel(db){
     });
   }
 
-
   lib.updateCliente = (cliente, id, handler) => {
     var filter = {"_id": ObjectId(id)};
     cliente.fecha_ingreso = new Date();

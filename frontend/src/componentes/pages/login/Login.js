@@ -87,10 +87,12 @@ class Login extends Component {
                   "user": this.state.email,
                   "firstVerified": true
                 }
+
               );
-              this.setState({"redirecto": true});
               localStorage.setItem('autorizado', 'true');
               localStorage.setItem('cliente', this.state.email);
+              this.setState({"redirecto": true});
+            
             }
           }).catch( (err) => {
              alert('Crendenciales incorrectas.');

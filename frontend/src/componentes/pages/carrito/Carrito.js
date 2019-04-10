@@ -73,6 +73,8 @@ function formatearNumero(nStr) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
+
+    //
 }
 
  const handleChange = (state) => {
