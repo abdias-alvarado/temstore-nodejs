@@ -91,8 +91,13 @@ class NuevoUsuario extends Component {
             return;
         }
 
-        axios.post('/api/usuarios/nuevo', {...this.state}).then(resp => {
-            window.location = '/administrar'
+        let datos = {};
+        datos.nombre = this.state.nombre;
+        datos.email = this.state.email;
+        datos.password = this.state.password;
+
+        axios.post('/api/usuarios/nuevo', datos).then(resp => {
+            window.location = '/catalogo'
         }).catch(exc => { throw exc; })
     };
 

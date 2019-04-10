@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import PrivateRoute from './componentes/generics/privateroute/PrivateRoute';
-import logo from './logo.svg';
+
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -17,7 +17,6 @@ import Clientes from './componentes/pages/clientes/Clientes';
 import ClienteNew from './componentes/pages/clientes/NuevoCliente';
 import EditarCliente from './componentes/pages/clientes/EditarCliente';
 
-import Usuarios from './componentes/pages/usuarios/Usuarios';
 import UsuarioNew from './componentes/pages/usuarios/NuevoUsuario';
 
 import Carrito from './componentes/pages/carrito/Carrito';
@@ -56,11 +55,7 @@ class App extends Component {
               <PrivateRoute path="/nuevoproducto" component={ProductoNew} auth={this.state}/>
               <PrivateRoute path="/nuevocliente" component={ClienteNew} auth={this.state}/>
               <PrivateRoute path="/nuevousuario" component={UsuarioNew} auth={this.state}/>
-              <Route path="/usuarios" render={(p)=>(<Usuarios {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <Route path="/salir" render={(p)=>(<Salir {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
-              
-                        
-
           </div>
         </Router>
       </div>

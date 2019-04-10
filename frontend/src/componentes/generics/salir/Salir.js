@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import {Redirect, Link} from 'react-router-dom';
-import Login from '../../pages/login/Login';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 class Salir extends Component {
     constructor(){
         super();
+       
+    }
+
+    render() {
         axios.get('/api/usuarios/logout',
         {...this.state})
         .then(()=>{            
@@ -15,12 +18,9 @@ class Salir extends Component {
                 "user": null,
                 "firstVerified": false
             });              
-            localStorage.setItem('autorizado', false);
+            
         });
-    }
-
-    render() {
-
+        localStorage.setItem('autorizado', false);
         return (<Redirect to={'/login'} />);
         
     };
