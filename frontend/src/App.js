@@ -50,14 +50,16 @@ class App extends Component {
               <Route path="/login"  render={(p)=>(<Login {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <PrivateRoute path="/catalogo" component={Catalogo} auth={this.state}/>
               <PrivateRoute path="/carrito" component={Carrito} auth={this.state}/>
-              <Route path="/clientes" render={(p)=>(<Clientes {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
+              <PrivateRoute path="/clientes" component={Clientes} auth={this.state}/>
+              <PrivateRoute path="/editarproducto" component={EditarProducto} auth={this.state}/>
+              <PrivateRoute path="/editarcliente" component={EditarCliente} auth={this.state}/>
+              <PrivateRoute path="/nuevoproducto" component={ProductoNew} auth={this.state}/>
+              <PrivateRoute path="/nuevocliente" component={ClienteNew} auth={this.state}/>
+              <PrivateRoute path="/nuevousuario" component={UsuarioNew} auth={this.state}/>
               <Route path="/usuarios" render={(p)=>(<Usuarios {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
               <Route path="/salir" render={(p)=>(<Salir {...p} auth={{...this.state, setAuthState:this.setAuthState}}/>)} />
-              <Route path="/editarproducto" render={(p) => (<EditarProducto {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />
-              <Route path="/editarcliente" render={(p) => (<EditarCliente {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)}/>
-              <Route path="/nuevoproducto" render={(p) => (<ProductoNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />
-              <Route path="/nuevocliente" render={(p) => (<ClienteNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />          
-              <Route path="/nuevousuario" render={(p) => (<UsuarioNew {...p} auth={{...this.state, setAuthState:this.setAuthState}} />)} />          
+              
+                        
 
           </div>
         </Router>
